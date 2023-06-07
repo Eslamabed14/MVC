@@ -1,9 +1,9 @@
 <?php
 
 namespace MVC\controllers;
-
 use MVC\core\controller;
 use MVC\models\user;
+use Rakit\Validation\Validator;
 
 class homecontroller extends controller
 {
@@ -25,5 +25,23 @@ class homecontroller extends controller
     public function login()
     {
         $this->view("\home\login" , ["title" => "LOGIN"]);
+    }
+    public function postLogin()
+    {   
+        $validator = new Validator;
+        $validation = $validator->validate($_POST , [
+            'email'                 => 'required|email',
+        ]);
+        if ($validation->fails()) {
+            // handling errors
+            $errors = $validation->errors();
+            echo "<pre>";
+            print_r($errors->firstOfAll());
+            echo "</pre>";
+            exit;
+        } else {
+            // validation passes
+            echo "Success!";
+        }
     }
 }

@@ -7,8 +7,10 @@
     <title><?= $title ; ?></title>
 </head>
 <body>
-    <input type="text">
-    <input type="password">
-    <input type="submit"    >
+  <form action="home/postLogin" method="post">
+    <input type="text" name="email">
+    <input type="password" name="password">
+    <input type="submit">
+  </form>
 </body>
 </html>
