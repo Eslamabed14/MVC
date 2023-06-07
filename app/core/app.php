@@ -24,7 +24,7 @@ class App
             $this->params = array_values($url); // props
         } else{
             $this->controller = 'homecontroller';
-            $this->method = 'index';
+            $this->method = 'login';
         }
        
     }
