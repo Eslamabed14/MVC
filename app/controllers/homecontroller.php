@@ -11,7 +11,6 @@ class homecontroller extends controller
     public function __construct()
     {
         Session::start();
-        
     }
 
     public function index()
@@ -52,7 +51,7 @@ class homecontroller extends controller
             $user = new user();
             $data = $user->getUser($_POST['email'],$_POST['password']);
             Session::set('user',$data);
-            header('LOCATION : user/index')
+            header('LOCATION : user/index');
         }
     }
 }
