@@ -10,4 +10,10 @@ class user extends model
         $data = model::db()->rows("SELECT * FROM users");
         return $data;
     }
+
+    public function getUser($email , $password)
+    {
+        $data = model::db()->rows("SELECT * FROM users Where `email` = ? && `password` = ? ", [$email ,$password]);
+        return $data;
+    }
 }

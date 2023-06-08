@@ -2,11 +2,18 @@
 
 namespace MVC\controllers;
 use MVC\core\controller;
+use MVC\core\Session;
 use MVC\models\user;
 use Rakit\Validation\Validator;
 
 class homecontroller extends controller
 {
+    public function __construct()
+    {
+        Session::start();
+        
+    }
+
     public function index()
     {   
         $user = new user();
@@ -30,7 +37,7 @@ class homecontroller extends controller
     {   
         $validator = new Validator;
         $validation = $validator->validate($_POST , [
-            'email'                 => 'required|email',
+            'email'=> 'required|email',
         ]);
         if ($validation->fails()) {
             // handling errors
@@ -41,7 +48,11 @@ class homecontroller extends controller
             exit;
         } else {
             // validation passes
-            echo "Success!";
+            // echo "Success!";
+            $user = new user();
+            $data = $user->getUser($_POST['email'],$_POST['password']);
+            Session::set('user',$data);
+            header('LOCATION : user/index')
         }
     }
 }
